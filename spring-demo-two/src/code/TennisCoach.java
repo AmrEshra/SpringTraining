@@ -20,15 +20,15 @@ public class TennisCoach implements Coach {
 //		System.out.println("Constructor");
 //	}
 		
-	@PostConstruct
-	public void postConstruct() {
-		System.out.println("@PostConstruct");
-	}
+//	@PostConstruct
+//	public void postConstruct() {
+//		System.out.println("@PostConstruct");
+//	}
 
-	@PreDestroy
-	public void preDestroy() {
-		System.out.println("@PreDestroy");
-	}
+//	@PreDestroy
+//	public void preDestroy() {
+//		System.out.println("@PreDestroy");
+//	}
 	
 	@Override
 	public String getDailyWorkout() {
