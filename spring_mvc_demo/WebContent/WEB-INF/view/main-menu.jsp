@@ -3,7 +3,7 @@
 
 <body>
 
-<h2>Spring MVC Demo - Home Page</h2>
+<h2>Hello Amr !</h2>
 
 </body>
 
