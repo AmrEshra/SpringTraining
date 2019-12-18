@@ -8,7 +8,9 @@
 	<br>
 	<br> Student name: ${param.studentName}
 	<br>
-	<br> Hi : ${message}
+	<br> Hi : ${message2}
+	
+	<br> Hi : ${message3}
 
 </body>
 
