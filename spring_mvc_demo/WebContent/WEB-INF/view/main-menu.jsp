@@ -8,6 +8,9 @@
 	<hr>
 
 	<a href="helloWorldController/showForm">Hello World form</a>
+	<br>
+	<br>
+	<a href="studentController/showForm">Student form</a>
 </body>
 
 </html>
