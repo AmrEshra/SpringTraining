@@ -18,6 +18,7 @@ public class StudentController {
 	public String processForm(@ModelAttribute ("student") Student student) {
 		
 		System.out.println(student.getFirstName() + " " + student.getLastName() + " from " + student.getCountry());
+		System.out.println(student.getGender());
 		return "student-confirmation";
 	}
 	

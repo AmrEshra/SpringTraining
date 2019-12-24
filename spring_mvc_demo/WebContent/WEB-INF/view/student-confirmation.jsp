@@ -4,7 +4,10 @@
 
 <body>
 
-	Hi : ${student.firstName} ${student.lastName} from ${student.country}
+	Hi : ${student.firstName} ${student.lastName} (${student.gender}) from ${student.country}
+	<br>
+	Skills
+		${student.skills}
 
 </body>
 
