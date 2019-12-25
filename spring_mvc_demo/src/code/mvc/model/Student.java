@@ -2,9 +2,15 @@ package code.mvc.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Student {
 
 	private String firstName;
+	
+	@NotNull
+	@Size(min=1 , message="is Required")
 	private String lastName;
 	private String country;
 	private String gender;

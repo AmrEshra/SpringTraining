@@ -11,7 +11,9 @@
 	
 		First name: <form:input path="firstName" />
 		<br>
-		Last name: <form:input path="lastName" />
+		Last name (*): <form:input path="lastName" />
+		<form:errors path="lastName"/>
+		
 		<br>
 		Country: <form:select path="country">
 					<form:options items="${countries}" />
