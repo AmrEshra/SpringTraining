@@ -7,6 +7,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import code.mvc.validation.CourseCode;
+
 public class Student {
 
 	private String firstName;
@@ -23,6 +25,9 @@ public class Student {
 	private String country;
 	private String gender;
 	private List<String> skills;
+	
+	@CourseCode
+	private String course;
 	
 	public Student() {
 	}
@@ -74,4 +79,12 @@ public class Student {
 	public void setAge(Integer age) {
 		this.age = age;
 	}	
+	
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
 }

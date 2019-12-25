@@ -14,6 +14,7 @@
 	<form:form action="processForm" modelAttribute="student">
 	
 		First name: <form:input path="firstName" />
+		<form:errors path="firstName" cssClass="error"/>
 		<br>
 		Last name (*): <form:input path="lastName" />
 		<form:errors path="lastName" cssClass="error"/>
@@ -33,7 +34,10 @@
 				<form:checkbox path="skills" value="PHP" label="PHP"/>
 				<form:checkbox path="skills" value="ORACLE" label="ORACLE"/>
 		<input type="submit" value="Submit" />
-
+		<br>
+		Course name: <form:input path="course" />
+		<form:errors path="course" cssClass="error"/>
+		<br>
 	</form:form>
 
 
