@@ -16,9 +16,10 @@ public class TestJDBC {
 		try {
 			session.beginTransaction();
 //			insert();
-//			get(122L);
+			WorkingDay d = get(122L);
 
 			update();
+			delete(d);
 			getAll();
 
 		} catch (Exception exc) {
@@ -31,6 +32,10 @@ public class TestJDBC {
 
 	}
 	
+	private static void delete(WorkingDay day) {
+		session.delete(day);
+	}
+
 	private static void update() {
 		session.createQuery("update WorkingDay w set w.time = '16:00'").executeUpdate();	
 	}
@@ -43,9 +48,10 @@ public class TestJDBC {
 		days.forEach(day ->System.out.println(day));
 	}
 
-	private static void get(Long i) {
+	private static WorkingDay get(Long i) {
 		WorkingDay d = session.get(WorkingDay.class, i);
 		System.out.println(d);
+		return d;
 	}
 
 	public static void insert() {
