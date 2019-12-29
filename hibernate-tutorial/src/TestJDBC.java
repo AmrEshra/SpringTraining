@@ -1,3 +1,5 @@
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,8 +16,10 @@ public class TestJDBC {
 		try {
 			session.beginTransaction();
 //			insert();
-			get(122L);
-			
+//			get(122L);
+
+			update();
+			getAll();
 
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -27,6 +31,18 @@ public class TestJDBC {
 
 	}
 	
+	private static void update() {
+		session.createQuery("update WorkingDay w set w.time = '16:00'").executeUpdate();	
+	}
+
+	private static void getAll() {
+
+		@SuppressWarnings("unchecked")
+		List<WorkingDay> days = session.createQuery("from WorkingDay").getResultList();
+		
+		days.forEach(day ->System.out.println(day));
+	}
+
 	private static void get(Long i) {
 		WorkingDay d = session.get(WorkingDay.class, i);
 		System.out.println(d);
