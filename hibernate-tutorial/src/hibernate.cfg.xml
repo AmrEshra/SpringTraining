@@ -8,9 +8,9 @@
 
         <!-- JDBC Database connection settings -->
          <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<property name="connection.url">jdbc:oracle:thin:@34.245.251.241:2545:GBDEV</property>
-        <property name="connection.username">PAYROLL</property>
-        <property name="connection.password">b6hWLUonHs3YPwJT</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="connection.username">DEV</property>
+        <property name="connection.password">DEV</property>
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
