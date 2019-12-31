@@ -18,17 +18,18 @@ public class OneToOne {
 	public static void main(String[] args) {
 		try {
 			session.beginTransaction();
-			insert();
+//			insert();
 //			Student d = get(21L);
 
 //			update();
 //			delete(d);
-//			getAll();
+			getAll();
 
 		} catch (Exception exc) {
 			exc.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
+			session.close();
 			factory.close();
 			System.out.println("Done");
 		}
