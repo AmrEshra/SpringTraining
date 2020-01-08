@@ -1,12 +1,17 @@
 package orm;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -37,6 +42,13 @@ public class Student {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="STUDENT_DETAIL_ID")
 	private StudentDetails studentDetails;
+	
+	@ManyToMany(fetch=FetchType.LAZY,
+				cascade= {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinTable(name ="STUDENT_COURSES",
+				joinColumns = @JoinColumn(name="STUDENT_ID"),
+				inverseJoinColumns=@JoinColumn(name="COURSE_ID"))
+	private List<Course> courses; 
 	
 	public Student(String name, String email) {
 		this.name = name;

@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -35,12 +37,19 @@ public class Course {
 	@Column(name="TITLE")
 	private String title;
 	
-	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="INSTRUCTOR_ID")
 	private Instructor instructor;
 	
 	@OneToMany(mappedBy = "course", cascade= CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Review> reviews;
+	
+	@ManyToMany(fetch=FetchType.LAZY,
+			cascade= {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinTable(name ="STUDENT_COURSES",
+				joinColumns = @JoinColumn(name="COURSE_ID"),
+				inverseJoinColumns=@JoinColumn(name="STUDENT_ID"))
+	private List<Student> students; 
 	
 	public Course(String title, Instructor instructor) {
 		this.title = title;
@@ -49,7 +58,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", instructor=" + instructor.getName() + "]";
+		return "Course [id=" + id + ", title=" + title + "]";
 	}
 	
 }
