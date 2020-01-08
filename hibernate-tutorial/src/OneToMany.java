@@ -6,13 +6,14 @@ import org.hibernate.cfg.Configuration;
 
 import orm.Course;
 import orm.Instructor;
-import orm.Student;
+import orm.Review;
 
 public class OneToMany {
 
 	static SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
 										.addAnnotatedClass(Instructor.class)
 										.addAnnotatedClass(Course.class)
+										.addAnnotatedClass(Review.class)
 										.buildSessionFactory();
 	static Session session = factory.getCurrentSession();
 	
@@ -20,11 +21,11 @@ public class OneToMany {
 		try {
 			session.beginTransaction();
 //			insert();
-			
 			Instructor d = get(1L);
 //			insertCouser(d);
-			
-			getCourses(d);
+//			insertReviews(21L);
+//			getCourses(d);
+//			deleteCourse(2L);
 
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -37,12 +38,26 @@ public class OneToMany {
 
 	}
 	
+	private static void deleteCourse(long l) {
+
+		Course d = session.get(Course.class, 2L);
+		session.delete(d);
+		session.getTransaction().commit();
+	}
+
+	private static void insertReviews(Long l) {
+		Course d = session.get(Course.class, l);
+		Review review = new Review("Help me", d);
+		
+		session.save(review);
+		session.getTransaction().commit();
+		
+	}
+
 	private static void insertCouser(Instructor instructor) {
 		
-		Course course = new Course("Java", instructor);
-		Course course2 = new Course("PHP", instructor);
+		Course course2 = new Course("C#", instructor);
 		
-		session.save(course);
 		session.save(course2);
 		session.getTransaction().commit();
 		
@@ -58,6 +73,7 @@ public class OneToMany {
 	private static Instructor get(Long i) {
 		Instructor d = session.get(Instructor.class, i);
 		System.out.println(d);
+		d.getCourses().forEach(course ->System.out.println(course));
 		return d;
 	}
 

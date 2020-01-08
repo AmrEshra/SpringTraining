@@ -1,13 +1,17 @@
 package orm;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -34,6 +38,9 @@ public class Course {
 	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="INSTRUCTOR_ID")
 	private Instructor instructor;
+	
+	@OneToMany(mappedBy = "course", cascade= CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Review> reviews;
 	
 	public Course(String title, Instructor instructor) {
 		this.title = title;
