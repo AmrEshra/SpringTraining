@@ -10,12 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspectPointCut {
 
-	@Pointcut("execution(* getCustomers(..))") //any getCustomers at any class
-	private void beforeAny() {}
+	@Pointcut("execution(* getCustomers(..))")
+	private void beforeAnyGetCustomers() {}
 	
-	@Before("beforeAny()") //any getCustomers at any class
+	@Pointcut("execution(* code.services.CustomerServiceImpl.getCustomers())")
+	private void beforeServiceGetCustomers() {}
+	
+	@Before("beforeAnyGetCustomers() && !beforeServiceGetCustomers()")
 	public void beforeGetCustomersAdvice(JoinPoint joinPoint) {
-		System.out.println("@Before PointCut " + 
+		System.out.println("@Before PointCut" + 
 							joinPoint.getSignature().getDeclaringType().getName() +"."+ joinPoint.getSignature().getName());
 	}
 }
