@@ -4,12 +4,10 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(1)
 public class LoggingAspectPointCut {
 
 	@Pointcut("execution(* getCustomers(..))")
@@ -20,7 +18,8 @@ public class LoggingAspectPointCut {
 	
 	@Before("beforeAnyGetCustomers() && !beforeServiceGetCustomers()")
 	public void beforeGetCustomersAdvice(JoinPoint joinPoint) {
-		//System.out.println("@Before PointCut " + joinPoint.getSignature());
+		System.out.println("@Before PointCut" + 
+							joinPoint.getSignature().getDeclaringType().getName() +"."+ joinPoint.getSignature().getName());
 	}
 }
 
