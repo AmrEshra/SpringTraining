@@ -27,7 +27,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @ComponentScan("code")
-@PropertySource({ "classpath:oracle.properties" })
+@PropertySource("classpath:oracle.properties")
 public class AppConfiguration implements WebMvcConfigurer {
 
 	@Autowired

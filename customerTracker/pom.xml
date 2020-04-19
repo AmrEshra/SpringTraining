@@ -94,7 +94,7 @@
 		</dependency>
 
 
-		<!-- to compensate for java 9 not including jaxb -->
+		<!-- to compensate for java 9+ not including jaxb -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
