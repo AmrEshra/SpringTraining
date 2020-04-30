@@ -31,7 +31,8 @@ public class CustomerRestController {
 	@GetMapping("/customers")
 	public List<Customer> getAllCustomers() {
 		
-		return customerService.findAll();
+//		return customerService.findAll();
+		return customerService.findAllSorted();
 	}
 	
 	@GetMapping("/customers/{id}")

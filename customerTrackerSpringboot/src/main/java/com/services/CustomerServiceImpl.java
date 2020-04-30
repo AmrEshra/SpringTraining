@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.dao.CustomerRepository;
@@ -25,7 +26,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
-
+	
+	@Override
+	public List<Customer> findAllSorted() {
+		return customerRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
+	}
+	
 	@Override
 	public Customer findById(Long id) {
 		Optional<Customer> result = customerRepository.findById(id);
