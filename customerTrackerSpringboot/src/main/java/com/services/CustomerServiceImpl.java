@@ -9,12 +9,11 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import com.dao.CustomerRepository;
 import com.entity.Customer;
 import com.exceptions.NotFoundException;
+import com.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
