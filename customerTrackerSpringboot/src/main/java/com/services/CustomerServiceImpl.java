@@ -3,8 +3,13 @@ package com.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.dao.CustomerRepository;
@@ -14,11 +19,13 @@ import com.exceptions.NotFoundException;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	
-	private CustomerRepository customerRepository;
-	
 	@Autowired
-	public CustomerServiceImpl(CustomerRepository customerRepository) {
+	private CustomerRepository customerRepository;
+
+    @Autowired
+    EntityManagerFactory emf;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
 
@@ -30,6 +37,29 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> findAllSorted() {
 		return customerRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
+	}
+	
+	@Override
+	public List<Customer> findByFirstName(String name) {
+		return customerRepository.findByFirstName(name);
+	}
+	
+	@Override
+	public List<Customer> findByLastName(String name) {
+		return customerRepository.findByLastName(name);
+	}
+	
+	@Override
+	public List<Customer> findByEmail(String email) {
+		
+		EntityManager entityManager = emf.createEntityManager();
+        //em.getTransaction().begin( );
+
+		TypedQuery<Customer> query = entityManager.createNamedQuery("customer_findByEmail", Customer.class);
+        query.setParameter("P_EMIAL", "%" + email + "%");
+        List<Customer> list = query.getResultList();
+        entityManager.close();
+        return list;
 	}
 	
 	@Override
@@ -61,6 +91,9 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepository.deleteById(id);
 	}
 
-	
+	@Override
+	public int countAll() {
+		return customerRepository.countAll();
+	}
 
 }

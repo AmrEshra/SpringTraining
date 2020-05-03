@@ -45,6 +45,30 @@ public class CustomerRestController {
 		}
 	}
 	
+	@GetMapping("/customers/fname/{name}")
+	public List<Customer> getCustomerByFirstName(@PathVariable String name) {
+
+		return customerService.findByFirstName(name);
+	}
+	
+	@GetMapping("/customers/lname/{name}")
+	public List<Customer> getCustomerByLastName(@PathVariable String name) {
+
+		return customerService.findByLastName(name);
+	}
+	
+	@GetMapping("/customers/email/{email}")
+	public List<Customer> getCustomerByEmail(@PathVariable String email) {
+
+		return customerService.findByEmail(email);
+	}
+	
+	@GetMapping("/countCustomers")
+	public int getCustomerCount() {
+
+		return customerService.countAll();
+	}
+	
 	@PostMapping("/customers")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		

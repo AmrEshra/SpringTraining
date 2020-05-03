@@ -5,16 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+
+@NamedQueries({
+	@NamedQuery(name = "customer_findByEmail", 
+			query = "SELECT c FROM Customer c WHERE c.email like :P_EMIAL"),
+	
+	@NamedQuery(name = "Customer.findByLastName", 
+			query = "SELECT c FROM Customer c WHERE LOWER(c.lastName) = LOWER(:P_LAST_NAME)")
+})
+
 @Table(name="CUSTOMERS")
 public class Customer {
 
 	@Id
-	@SequenceGenerator(name = "CUSTOMERS_SEQ	", sequenceName = "CUSTOMERS_SEQ	", allocationSize = 1)  
-	@GeneratedValue(generator = "CUSTOMERS_SEQ	", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "CUSTOMERS_SEQ", sequenceName = "CUSTOMERS_SEQ", allocationSize = 1)  
+	@GeneratedValue(generator = "CUSTOMERS_SEQ", strategy = GenerationType.SEQUENCE)
 	@Column(name="ID")
 	private Long id;
 	
